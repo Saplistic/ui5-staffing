@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata4/sap/zui_staffing01/srvd/sap/zui_staffing01/0001/",
+        "uri": "/sap/opu/odata4/sap/zsui_staffing_o4/srvd/sap/zsui_staffing_o4/0001/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -69,10 +69,10 @@
           "bundleName": "ui5staffingapp.i18n.i18n"
         }
       },
-      "projectAssignment": {
+      "staffingData": {
         "dataSource": "mainService"
       },
-      "": {
+      "_": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {

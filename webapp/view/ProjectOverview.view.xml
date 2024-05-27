@@ -23,35 +23,45 @@
 				<axistime:ProportionZoomStrategy>
 					<axistime:totalHorizon>
 						<config:TimeHorizon
-							startTime="20220501000000" endTime="20260901000000"/>
+							startTime="20230901000000" endTime="20260901000000"/>
 					</axistime:totalHorizon>
 					<axistime:visibleHorizon>
 						<config:TimeHorizon
-							startTime="20220501000000" endTime="20260601000000"/>
+							startTime="20230901000000" endTime="20260601000000"/>
 					</axistime:visibleHorizon>
 				</axistime:ProportionZoomStrategy>
 			</axisTimeStrategy>
 			<table>
-				<table:Table
+				<table:TreeTable
 					id="ganttTable"
 					selectionMode="Single"
 					selectionBehavior="RowSelector"
 					enableColumnReordering="true"
-					rows="{ path: 'projectAssignment>/PersonProject', parameters: { $expand: '_Person' } }">
+					rows="{
+						path: 'GanttProjectData>/Projects',
+						parameters: {
+							arrayNames: ['_ProjectAssignments', '_WorkPeriods'],
+							numberOfExpandedLevels: 2
+						}
+					}">
 					<table:columns>
-						<table:Column label="UserName">
+						<table:Column label="Name">
 							<table:template>
-								<m:Text text="{projectAssignment>_Person/FirstName} {projectAssignment>_Person/LastName}"/>
+								<m:Text text="{GanttProjectData>Name}{GanttProjectData>DateStarted}"/>
 							</table:template>
 						</table:Column>
 						<table:Column label="StartDate">
 							<table:template>
-								<m:DatePicker dateValue="{projectAssignment>DateStarted}"/>
+								<m:DatePicker 
+									dateValue="{path:'GanttProjectData>DateStarted', formatter: '.formatter.abapDate'}" 
+									visible="{= !!${GanttProjectData>DateStarted}}" />
 							</table:template>
 						</table:Column>
 						<table:Column label="EndDate" >
 							<table:template>
-								<m:DatePicker dateValue="{projectAssignment>DateEnded}"/>
+								<m:DatePicker 
+									dateValue="{path:'GanttProjectData>DateEnded', formatter: '.formatter.abapDate'}"
+									visible="{= !!${GanttProjectData>DateEnded}}"/>
 							</table:template>
 						</table:Column>
 					</table:columns>
@@ -59,11 +69,11 @@
 						<rm:Auto minRowCount="12"/>
 					</table:rowMode>
 					<table:rowSettingsTemplate>
-						<GanttRowSettings rowId="{projectAssignment>_Person/FirstName}{projectAssignment>_Person/LastName}">
+						<GanttRowSettings rowId="{GanttProjectData>Id}">
 							<shapes1>
 								<BaseRectangle 
-									title="{projectAssignment>_Person/FirstName} {projectAssignment>_Person/LastName}"
-									tooltip="{projectAssignment>_Person/FirstName} {projectAssignment>_Person/LastName}"
+									title="Period"
+									tooltip="Period"
 									fill="#0092D1"
 									selectedFill="#0955d9"
 									fontSize="15"
@@ -74,12 +84,13 @@
 									titleSpacing="20"
 									horizontalTextAlignment="Dynamic"
 									verticalTextAlignment="Center"
-									time="{projectAssignment>DateStarted}" selectable="true" countInBirdEye="true" connectable="true" shapeId="{}"
-									draggable="true" resizable="true" endTime="{projectAssignment>DateEnded}"/>
+									time="{path:'GanttProjectData>DateStarted', formatter: '.formatter.abapDate'}" selectable="true" countInBirdEye="true" 
+									connectable="true" shapeId="{GanttProjectData>Id}"
+									draggable="true" resizable="true" endTime="{path:'GanttProjectData>DateEnded', formatter: '.formatter.abapDate'}"/>
 							</shapes1>
 						</GanttRowSettings>
 					</table:rowSettingsTemplate>
-				</table:Table>
+				</table:TreeTable>
 			</table>
 		</GanttChartWithTable>
 	</GanttChartContainer>

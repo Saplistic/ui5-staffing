@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>http://cb6:443/sap/opu/odata4/sap/zui_staffing01/srvd/sap/zui_staffing01/0001/
+|**Service URL**<br>http://cb6:443/sap/opu/odata4/sap/zsui_staffing_o4/srvd/sap/zsui_staffing_o4/0001/
 |**Module Name**<br>ui5staffingapp|
 |**Application Title**<br>StaffingApp|
 |**Namespace**<br>|

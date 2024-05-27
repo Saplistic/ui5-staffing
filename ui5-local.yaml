@@ -39,7 +39,7 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata4/sap/zui_staffing01/srvd/sap/zui_staffing01/0001
+          - urlPath: /sap/opu/odata4/sap/zsui_staffing_o4/srvd/sap/zsui_staffing_o4/0001
             metadataPath: ./webapp/localService/metadata.xml
             mockdataPath: ./webapp/localService/data
             generateMockData: true
