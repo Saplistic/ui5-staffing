@@ -47,7 +47,7 @@
 					<table:columns>
 						<table:Column label="Name">
 							<table:template>
-								<m:Text text="{GanttProjectData>Name}{GanttProjectData>DateStarted}"/>
+								<m:Text text="{GanttProjectData>Name}{GanttProjectData>_Person/FirstName} {GanttProjectData>_Person/LastName}{GanttProjectData>DateStarted}"/>
 							</table:template>
 						</table:Column>
 						<table:Column label="StartDate">
@@ -72,8 +72,8 @@
 						<GanttRowSettings rowId="{GanttProjectData>Id}">
 							<shapes1>
 								<BaseRectangle 
-									title="Period"
-									tooltip="Period"
+									title="WorkPeriod"
+									tooltip="WorkPeriod"
 									fill="#0092D1"
 									selectedFill="#0955d9"
 									fontSize="15"

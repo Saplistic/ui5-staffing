@@ -17,7 +17,7 @@ function (Controller, JSONModel, formatter) {
         onInit: function () {
             var oModel = this.getOwnerComponent().getModel("staffingData");
             var oListBinding = oModel.bindList("/Projects", undefined, undefined, undefined, {
-                $expand: "_ProjectAssignments($expand=_WorkPeriods)"
+                $expand: "_ProjectAssignments($expand=_WorkPeriods,_Person)"
             });
             oListBinding.getContexts();
 
