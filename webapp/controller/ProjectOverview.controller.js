@@ -33,7 +33,33 @@ function (Controller, JSONModel, formatter) {
             });
         },
 
-        onShapeResize: function(oEvent) {}
+        getODataPath: function(oContext) {
+            var sODataPath = "/WorkPeriods(Id=" + oContext.Id + ",ProjectAssignmentId=" + oContext.ProjectAssignmentId + ",ProjectId=" + oContext.ProjectId + ",IsActiveEntity=true)";
+            return sODataPath;
+        },
+        
 
+        onShapeResize: function(oEvent) {
+            var oShape = oEvent.getParameter("shape");
+            var aNewTime = oEvent.getParameter("newTime");
+            var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "yyyy-MM-dd" });
+            
+            var oStaffingDataModel = this.getView().getModel("staffingData");
+            var sBindingPath = oShape.getBindingContext("GanttProjectData").getPath();
+            var oObject = this.getView().getModel("GanttProjectData").getProperty(sBindingPath);
+            var oBinding = oStaffingDataModel.bindContext(this.getODataPath(oObject));
+
+            oBinding.getBoundContext().setProperty("DateStarted", dateFormat.format(aNewTime[0]));
+            oBinding.getBoundContext().setProperty("DateEnded", dateFormat.format(aNewTime[1]));
+            
+            // console.log(oBinding.getObject()); 
+
+            //TODO only update frontend (code below) after update is successful
+            var oDataModel = this.getView().byId("ganttTable").getModel("GanttProjectData");
+
+            oDataModel.setProperty(sBindingPath + "/DateStarted", dateFormat.format(aNewTime[0]), false);
+            oDataModel.setProperty(sBindingPath + "/DateEnded", dateFormat.format(aNewTime[1]), false);
+        }
+        
     });
 });

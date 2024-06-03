@@ -70,7 +70,8 @@
         }
       },
       "staffingData": {
-        "dataSource": "mainService"
+        "dataSource": "mainService",
+        "preload": true
       },
       "_": {
         "dataSource": "mainService",
